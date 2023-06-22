@@ -9,6 +9,14 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>mybatis</module>
+        <module>mybatisplus</module>
+        <module>spring</module>
+        <module>file</module>
+        <module>redis</module>
+        <module>excel</module>
+        <module>pdf</module>
+        <module>mongodb</module>
+        <module>docker</module>
     </modules>
     <packaging>pom</packaging>
 
