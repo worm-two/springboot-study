@@ -1,0 +1,1 @@
+ docker run -d --name tomcat -p 8899:8080 tomcat:latest

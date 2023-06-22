@@ -1,0 +1,14 @@
+# 配置文件:zoo.cfg
+clientPort=2181
+dataDir=/data
+dataLogDir=/data/log
+tickTime=2000
+initLimit=5
+syncLimit=2
+maxClientCnxns=60
+
+# docker指令
+docker run -d -e TZ="Asia/Shanghai" --name zookeeper -p 2181:2181 --restart=always --privileged=true \
+-v /root/software/zookeeper/data:/data \
+-v /root/software/zookeeper/conf:/conf \
+zookeeper

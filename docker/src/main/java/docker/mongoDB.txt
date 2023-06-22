@@ -1,0 +1,12 @@
+#
+docker run -d --name mongodb --restart always  --privileged -p 27017:27017 \
+-v /root/software/mongoDB/data:/data/db \
+-e MONGO_INITDB_ROOT_USERNAME=ming \
+-e MONGO_INITDB_ROOT_PASSWORD=ming \
+mongo mongod --auth
+
+docker exec -it mongodb mongosh admin
+
+
+db.createUser({ user: 'ming', pwd: 'ming', roles: [ { role: "userAdminAnyDatabase", db: "admin" } ] });
+

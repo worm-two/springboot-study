@@ -1,0 +1,10 @@
+version: '1'
+services:
+  myNginx:
+    image:
+    container_name: myNginx
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      -

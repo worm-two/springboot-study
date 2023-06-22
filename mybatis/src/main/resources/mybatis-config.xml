@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!--
+    标签位置：properties-settings-typeAliases-typeHandlers-objectFactory-objectWrapperFactory-reflectorFactory-plugins-environments-databaseIdProvider-mappers
+    -->
+
+    <!--
+    properties标签
+        一 作用：1、导入resource目录下的properties配置文件 2、配置全局变量
+        二 优先级：方法参数传递的属性>配置文件中的属性>标签体内配置的属性
+        三 默认值：MyBatis 3.4.2之后可以为占位符指定一个默认值，该功能默认关闭
+    -->
+    <properties resource="jdbc.properties"/>
+    <!--<properties>-->
+    <!--<property name="db.url" value="com.mysql.cj.jdbc.Driver"/>-->
+    <!--<property name="driver" value="${db.driver:com.mysql.jdbc.Driver}"/>-->
+    <!--</properties>-->
+
+    <!--settings标签：mybatis全局配置-->
+    <settings>
+        <!--将表中字段的下划线自动转换为驼峰-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--开启延迟加载-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!-- 打印sql日志 -->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+    <!-- 为实体类配置别名 -->
+    <typeAliases>
+        <!--设置某个具体实体类的别名-->
+<!--        <typeAlias type="entity.people.Sword" alias="sword"/>-->
+        <!--以包为单位，设置改包下所有的类型都拥有默认的别名，即类名且不区分大小写-->
+        <package name="practice.entity"/>
+    </typeAliases>
+
+    <!--Java数据类型与MySQL数据类型映射-->
+<!--    <typeHandlers>-->
+<!--        <typeHandler handler="LongTyperHandler" javaType="Long" jdbcType="bigint"/>-->
+<!--    </typeHandlers>-->
+
+    <!--创建结果对象新实例-->
+    <!--<objectFactory type="xxx"/>-->
+
+    <!--配置Mybatis的拦截器-->
+<!--    <plugins>-->
+<!--        <plugin interceptor="xxx"/>-->
+<!--    </plugins>-->
+
+    <!--设置连接数据库的环境配置-->
+    <environments default="development">
+        <!--开发环境-->
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+        <!--测试环境-->
+<!--        <environment id="test">-->
+<!--            <transactionManager type="JDBC"/>-->
+<!--            <dataSource type="POOLED">-->
+<!--                <property name="driver" value="${jdbc.driver}"/>-->
+<!--                <property name="url" value="${jdbc.url}"/>-->
+<!--                <property name="username" value="${jdbc.username}"/>-->
+<!--                <property name="password" value="${jdbc.password}"/>-->
+<!--            </dataSource>-->
+<!--        </environment>-->
+    </environments>
+    
+    <!--配置不同类型的数据库-->
+<!--    <databaseIdProvider type="xxx">-->
+<!--        <property name="xxx" value="xxx"/>-->
+<!--    </databaseIdProvider>-->
+    
+    <!--映射mapper文件-->
+    <mappers>
+        <!--<mapper class="mappers.UserMapper"/>-->
+        <!--<mapper resource="mappers/UserMapper.xml"/>-->
+<!--        <mapper resource="mapper/UserMapper.xml"/>-->
+        <package name="mappers"/>
+    </mappers>
+</configuration>

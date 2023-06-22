@@ -1,0 +1,6 @@
+docker save \
+mysql:8.0.32 \
+redis:alpine3.17 \
+tomcat:9.0.73-jdk8-corretto-al2 \
+centos:centos7.9.2009 \
+-o all.tar

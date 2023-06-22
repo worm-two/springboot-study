@@ -1,0 +1,35 @@
+docker run -d -uroot -p 9095:8080 -p 50000:50000 --name jenkins \
+-v /root/software/jenkins/home:/var/jenkins_home \
+-v /etc/localtime:/etc/localtime \
+jenkins/jenkins
+
+
+docker run -d -uroot -p 9095:8080 -p 50000:50000 --name jenkins  \
+ -v /etc/timezone/timezone:/etc/timezone \
+ -v /etc/localtime:/etc/localtime:ro \
+ -v $VOLUMES_PATH/jenkins/home:/var/jenkins_home \
+ --log-opt max-size=100m \
+ --log-opt max-file=2 \
+ --restart always \
+ --privileged=true \
+jenkins/jenkins:latest-jdk11
+
+
+docker run -d -uroot -p 9095:8080 -p 50000:50000 --name jenkins  \
+ -v /etc/timezone/timezone:/etc/timezone \
+ -v /etc/localtime:/etc/localtime:ro \
+ -v /root/volumes-data/jenkins/home:/var/jenkins_home \
+ --log-opt max-size=100m \
+ --log-opt max-file=2 \
+ --restart always \
+ --privileged=true \
+jenkins/jenkins:2.401-jdk11
+
+docker run -d -uroot -p 9095:8080 -p 50000:50000 --name jenkins  \
+ -v /etc/localtime:/etc/localtime:ro \
+ -v /root/volumes-data/jenkins/home:/var/jenkins_home \
+ --log-opt max-size=100m \
+ --log-opt max-file=2 \
+ --restart always \
+ --privileged=true \
+jenkins/jenkins:2.401-jdk11

@@ -1,0 +1,60 @@
+docker rm $(docker stop gitlab)
+
+ -v /etc/timezone:/etc/timezone:ro \
+
+
+docker run -d  -p 9980:80  -p 9922:22 \
+ -v /etc/timezone/timezone:/etc/timezone \
+ -v /etc/localtime:/etc/localtime:ro \
+ -v $VOLUMES_PATH/gitlab/etc:/etc/gitlab  \
+ -v $VOLUMES_PATH/gitlab/log:/var/log/gitlab \
+ -v $VOLUMES_PATH/gitlab/opt:/var/opt/gitlab \
+ --log-opt max-size=100m \
+ --log-opt max-file=2 \
+ --restart always \
+ --privileged=true \
+ --name gitlab \
+ gitlab/gitlab-ce
+
+
+
+
+
+
+
+
+#gitlab访问地址，可以写域名。如果端口不写的话默认为80端口
+external_url 'http://192.168.2.36'
+#ssh主机ip
+gitlab_rails['gitlab_ssh_host'] = '192.168.2.36'
+#ssh连接端口
+gitlab_rails['gitlab_shell_ssh_port'] = 9922
+
+gitlab-ctl reconfigure
+
+
+vi /opt/gitlab/embedded/service/gitlab-rails/config/gitlab.yml
+
+user.password='gouxuming'
+
+
+
+# 进入容器内部
+docker exec -it gitlab /bin/bash
+
+# 进入控制台
+gitlab-rails console -e production
+
+# 查询id为1的用户，id为1的用户是超级管理员
+user = User.where(id:1).first
+# 修改密码为lhx123456
+
+user.password='gouxuming'
+
+user.password_confirmation = 'gouxuming'
+
+# 保存
+user.save!
+# 退出
+exit
+

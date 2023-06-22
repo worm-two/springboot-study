@@ -1,0 +1,22 @@
+
+spring.datasource.platform=mysql
+db.num=1
+db.url.0=jdbc:mysql://192.168.2.36:3307/nacos_config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=true&serverTimezone=Asia/Shanghai
+db.user.0=nacos
+db.password.0=nacos
+
+
+docker  run \
+--name nacos -d \
+--privileged=true \
+--restart=always \
+-p 8848:8848 \
+-p 9848:9848 \
+-p 9849:9849 \
+-e MODE=standalone \
+-e PREFER_HOST_MODE=hostname \
+-v /root/software/nacos/logs:/home/nacos/logs \
+-v /root/software/nacos/data:/home/nacos/data \
+-v /root/software/nacos/conf:/home/nacos/conf \
+-v/root/software/nacos/bin:/home/nacos/bin \
+nacos/nacos-server:v2.2.2-slim
